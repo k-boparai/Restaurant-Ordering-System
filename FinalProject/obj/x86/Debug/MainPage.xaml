@@ -1,0 +1,82 @@
+﻿<Page x:ConnectionId='1'
+    x:Class="FinalProject.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FinalProject"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:FinalProject.Models"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="38,23,0,0" Text="Karan's Indian Food Shop" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="40"/>
+        <TextBox x:ConnectionId='2' x:Name="username" HorizontalAlignment="Left" Margin="542,32,0,0"  Text="" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="26" PlaceholderText="Username" Width="220"/>
+        <TextBox x:ConnectionId='3' x:Name="password" HorizontalAlignment="Left" Margin="781,32,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="26" PlaceholderText="Password" Width="200"/>
+        <Button x:ConnectionId='4' x:Name="login" Content="Login" Margin="997,32,0,0" VerticalAlignment="Top" FontSize="26"                    />
+        <Button x:ConnectionId='5' x:Name="Register" Content="Register" Margin="1086,32,0,0" VerticalAlignment="Top" FontSize="26"                       />
+        <TextBlock x:ConnectionId='6' x:Name="loggedIn" HorizontalAlignment="Left" Margin="543,38,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="26" Visibility="Collapsed"/>
+        <TextBlock x:ConnectionId='7' x:Name="error" HorizontalAlignment="Left" Margin="1204,43,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" Height="33" Width="270" Foreground="Red"/>
+        <Button x:ConnectionId='8' x:Name="logout" Content="Logout" Margin="997,32,0,0" VerticalAlignment="Top" FontSize="26"                       Width="202" Visibility="Collapsed"/>
+
+
+        <TextBlock HorizontalAlignment="Left" Margin="0,164,0,0" Text="Categories" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="45" Width="250" TextAlignment="Center" Height="80"/>
+        <Button x:ConnectionId='9' x:Name="appetizers" Content="Appetizers" FontSize="40" Width="250" Height="80" Margin="0,236,0,0" VerticalAlignment="Top"                         />
+        <Button x:ConnectionId='10' x:Name="mains" Content="Mains" FontSize="40" Width="250" Height="80" Margin="0,321,0,0" VerticalAlignment="Top"                    />
+        <Button x:ConnectionId='11' x:Name="sides" Content="Sides" FontSize="40" Width="250" Height="80" Margin="0,406,0,0" VerticalAlignment="Top"                    />
+        <Button x:ConnectionId='12' x:Name="dessert" Content="Desserts" FontSize="40" Width="250" Height="80" Margin="0,491,0,0" VerticalAlignment="Top"                      />
+
+        <TextBlock x:ConnectionId='13' x:Name="listLabel" HorizontalAlignment="Left" Margin="270,97,0,0" Text="Pick a Category" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="40" Width="600" TextAlignment="Center" Height="60"/>
+        <ListView x:ConnectionId='14' x:Name="list" Margin="270,164,630,236"                                    Width="600" Height="600">
+            <ListView.ItemTemplate>
+                <DataTemplate                          >
+                    <StackPanel>
+                        <TextBlock Name="foodName" FontSize="20" Text="{Binding ProductName}" TextAlignment="Center" Grid.Column="0"/>
+                        <TextBlock Name="foodPrice" FontSize="20" Text="{Binding ProductPrice}" TextAlignment="Center" Grid.Column="1"/>
+                        <Button x:ConnectionId='42' Name="addToCart" Tag="{Binding ProductId}" Content="Add to Cart" FontSize="20"                           Grid.Column="2"></Button>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <TextBlock x:ConnectionId='15' x:Name="cartLabel" HorizontalAlignment="Left" Margin="974,97,0,0" Text="Cart" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="40" Width="500" TextAlignment="Center" Height="60"/>
+        <ListView x:ConnectionId='16' x:Name="cart" Margin="974,164,26,236"                                     Width="500" Height="600">
+            <ListView.ItemTemplate>
+                <DataTemplate                          >
+                    <StackPanel>
+                        <TextBlock Name="foodName" FontSize="20" Text="{Binding ProductName}" TextAlignment="Center" Grid.Column="0"/>
+                        <TextBlock Name="foodPrice" FontSize="20" Text="{Binding ProductPrice}" TextAlignment="Center" Grid.Column="1"/>
+                        <Button x:ConnectionId='37' Name="removeFromCart" Tag="{Binding ProductName}" Content="Remove" FontSize="20"                                 Grid.Column="2"></Button>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <TextBlock x:ConnectionId='17' x:Name="subtotal" HorizontalAlignment="Left" Margin="974,769,0,0" Text="Subtotal: $0.00" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="30" Width="300" TextAlignment="Center" Height="60"/>
+        <TextBlock x:ConnectionId='18' x:Name="discount" HorizontalAlignment="Left" Margin="974,827,0,0" Text="Discount: 0%" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="30" Width="300" TextAlignment="Center" Height="60"/>
+        <TextBlock x:ConnectionId='19' x:Name="total" HorizontalAlignment="Left" Margin="974,885,0,0" Text="Total: $0.00" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="30" Width="300" TextAlignment="Center" Height="60"/>
+        <Button x:ConnectionId='20' x:Name="checkout" Content="Checkout" FontSize="40" Width="200" Height="169" Margin="1274,769,0,0" VerticalAlignment="Top"                       />
+
+        <Button x:ConnectionId='21' x:Name="feedback" Content="Submit Feedback" FontSize="23" Width="200" Height="50" Margin="10,813,0,0" VerticalAlignment="Top"                        Visibility="Visible"/>
+        <TextBox x:ConnectionId='22' x:Name="feedbackBox" HorizontalAlignment="Left" Margin="10,873,0,0" PlaceholderText="Enter feedback here" TextWrapping="Wrap" VerticalAlignment="Top" Height="65" Width="396" FontSize="20" Visibility="Visible"/>
+
+        <TextBlock x:ConnectionId='23' x:Name="feedbackLabel" Margin="21,757,1371,0" Text="Feedback" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" TextAlignment="Center" Height="29" Visibility="Collapsed"/>
+        <ListView x:ConnectionId='24' x:Name="listOfFeedback" Margin="21,789,630,33"                                     Visibility="Collapsed">
+            <ListView.ItemTemplate>
+                <DataTemplate                           >
+                    <StackPanel>
+                        <TextBlock Name="feedbackText" FontSize="20" Text="{Binding feedbackText}" TextAlignment="Center" Grid.Column="0"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <TextBox x:ConnectionId='25' x:Name="insertName" HorizontalAlignment="Left" Margin="10,588,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="225" Height="46" FontSize="25" TextAlignment="Center" PlaceholderText="Name" Visibility="Collapsed"/>
+        <TextBox x:ConnectionId='26' x:Name="insertPrice" HorizontalAlignment="Left" Margin="10,639,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="225" Height="46" FontSize="25" TextAlignment="Center" PlaceholderText="Price" Visibility="Collapsed"/>
+        <Button x:ConnectionId='27' x:Name="insertButton" Content="Insert" Margin="10,690,0,0" VerticalAlignment="Top" Height="42" Width="110" FontSize="25"                            Visibility="Collapsed"/>
+        <Button x:ConnectionId='28' x:Name="deleteButton" Content="Delete" Margin="125,690,0,0" VerticalAlignment="Top" Height="42" Width="110" FontSize="25"                            Visibility="Collapsed"/>
+        <TextBlock x:ConnectionId='29' x:Name="adminText" HorizontalAlignment="Left" Margin="10,745,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Height="44" Width="225" FontSize="20" Foreground="Red"/>
+
+    </Grid>
+</Page>
+

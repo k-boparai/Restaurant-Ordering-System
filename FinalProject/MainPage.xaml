@@ -1,0 +1,81 @@
+﻿<Page
+    x:Class="FinalProject.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FinalProject"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:FinalProject.Models"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="38,23,0,0" Text="Karan's Indian Food Shop" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="40"/>
+        <TextBox x:Name="username" HorizontalAlignment="Left" Margin="542,32,0,0"  Text="" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="26" PlaceholderText="Username" Width="220"/>
+        <TextBox x:Name="password" HorizontalAlignment="Left" Margin="781,32,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="26" PlaceholderText="Password" Width="200"/>
+        <Button x:Name="login" Content="Login" Margin="997,32,0,0" VerticalAlignment="Top" FontSize="26" Click="login_Click"/>
+        <Button x:Name="Register" Content="Register" Margin="1086,32,0,0" VerticalAlignment="Top" FontSize="26" Click="Register_Click"/>
+        <TextBlock x:Name="loggedIn" HorizontalAlignment="Left" Margin="543,38,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="26" Visibility="Collapsed"/>
+        <TextBlock x:Name="error" HorizontalAlignment="Left" Margin="1204,43,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" Height="33" Width="270" Foreground="Red"/>
+        <Button x:Name="logout" Content="Logout" Margin="997,32,0,0" VerticalAlignment="Top" FontSize="26" Click="logout_Click"  Width="202" Visibility="Collapsed"/>
+
+
+        <TextBlock HorizontalAlignment="Left" Margin="0,164,0,0" Text="Categories" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="45" Width="250" TextAlignment="Center" Height="80"/>
+        <Button x:Name="appetizers" Content="Appetizers" FontSize="40" Width="250" Height="80" Margin="0,236,0,0" VerticalAlignment="Top" Click="appetizers_Click"/>
+        <Button x:Name="mains" Content="Mains" FontSize="40" Width="250" Height="80" Margin="0,321,0,0" VerticalAlignment="Top" Click="mains_Click"/>
+        <Button x:Name="sides" Content="Sides" FontSize="40" Width="250" Height="80" Margin="0,406,0,0" VerticalAlignment="Top" Click="sides_Click"/>
+        <Button x:Name="dessert" Content="Desserts" FontSize="40" Width="250" Height="80" Margin="0,491,0,0" VerticalAlignment="Top" Click="dessert_Click"/>
+
+        <TextBlock x:Name="listLabel" HorizontalAlignment="Left" Margin="270,97,0,0" Text="Pick a Category" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="40" Width="600" TextAlignment="Center" Height="60"/>
+        <ListView x:Name="list" Margin="270,164,630,236" ItemsSource="{x:Bind currentList}" Width="600" Height="600">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="data:Product">
+                    <StackPanel>
+                        <TextBlock Name="foodName" FontSize="20" Text="{Binding ProductName}" TextAlignment="Center" Grid.Column="0"/>
+                        <TextBlock Name="foodPrice" FontSize="20" Text="{Binding ProductPrice}" TextAlignment="Center" Grid.Column="1"/>
+                        <Button Name="addToCart" Tag="{Binding ProductId}" Content="Add to Cart" FontSize="20" Tapped="addToCart_Tapped" Grid.Column="2"></Button>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <TextBlock x:Name="cartLabel" HorizontalAlignment="Left" Margin="974,97,0,0" Text="Cart" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="40" Width="500" TextAlignment="Center" Height="60"/>
+        <ListView x:Name="cart" Margin="974,164,26,236" ItemsSource="{x:Bind shoppingCart}" Width="500" Height="600">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="data:Product">
+                    <StackPanel>
+                        <TextBlock Name="foodName" FontSize="20" Text="{Binding ProductName}" TextAlignment="Center" Grid.Column="0"/>
+                        <TextBlock Name="foodPrice" FontSize="20" Text="{Binding ProductPrice}" TextAlignment="Center" Grid.Column="1"/>
+                        <Button Name="removeFromCart" Tag="{Binding ProductName}" Content="Remove" FontSize="20" Tapped="removeFromCart_Tapped"  Grid.Column="2"></Button>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <TextBlock x:Name="subtotal" HorizontalAlignment="Left" Margin="974,769,0,0" Text="Subtotal: $0.00" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="30" Width="300" TextAlignment="Center" Height="60"/>
+        <TextBlock x:Name="discount" HorizontalAlignment="Left" Margin="974,827,0,0" Text="Discount: 0%" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="30" Width="300" TextAlignment="Center" Height="60"/>
+        <TextBlock x:Name="total" HorizontalAlignment="Left" Margin="974,885,0,0" Text="Total: $0.00" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="30" Width="300" TextAlignment="Center" Height="60"/>
+        <Button x:Name="checkout" Content="Checkout" FontSize="40" Width="200" Height="169" Margin="1274,769,0,0" VerticalAlignment="Top" Click="checkout_Click"/>
+
+        <Button x:Name="feedback" Content="Submit Feedback" FontSize="23" Width="200" Height="50" Margin="10,813,0,0" VerticalAlignment="Top" Click="feedback_Click" Visibility="Visible"/>
+        <TextBox x:Name="feedbackBox" HorizontalAlignment="Left" Margin="10,873,0,0" PlaceholderText="Enter feedback here" TextWrapping="Wrap" VerticalAlignment="Top" Height="65" Width="396" FontSize="20" Visibility="Visible"/>
+
+        <TextBlock x:Name="feedbackLabel" Margin="21,757,1371,0" Text="Feedback" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" TextAlignment="Center" Height="29" Visibility="Collapsed"/>
+        <ListView x:Name="listOfFeedback" Margin="21,789,630,33" ItemsSource="{x:Bind feedbackList}" Visibility="Collapsed">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="data:Feedback">
+                    <StackPanel>
+                        <TextBlock Name="feedbackText" FontSize="20" Text="{Binding feedbackText}" TextAlignment="Center" Grid.Column="0"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <TextBox x:Name="insertName" HorizontalAlignment="Left" Margin="10,588,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="225" Height="46" FontSize="25" TextAlignment="Center" PlaceholderText="Name" Visibility="Collapsed"/>
+        <TextBox x:Name="insertPrice" HorizontalAlignment="Left" Margin="10,639,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="225" Height="46" FontSize="25" TextAlignment="Center" PlaceholderText="Price" Visibility="Collapsed"/>
+        <Button x:Name="insertButton" Content="Insert" Margin="10,690,0,0" VerticalAlignment="Top" Height="42" Width="110" FontSize="25" Click="insertButton_Click" Visibility="Collapsed"/>
+        <Button x:Name="deleteButton" Content="Delete" Margin="125,690,0,0" VerticalAlignment="Top" Height="42" Width="110" FontSize="25" Click="deleteButton_Click" Visibility="Collapsed"/>
+        <TextBlock x:Name="adminText" HorizontalAlignment="Left" Margin="10,745,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Height="44" Width="225" FontSize="20" Foreground="Red"/>
+
+    </Grid>
+</Page>
